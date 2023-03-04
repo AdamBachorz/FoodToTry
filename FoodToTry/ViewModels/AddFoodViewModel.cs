@@ -22,6 +22,8 @@ namespace FoodToTry.ViewModels
         [ObservableProperty]
         private string newFoodEntry;
         [ObservableProperty]
+        private string newAdditionalInfo;
+        [ObservableProperty]
         private ObservableCollection<string> newFoodItems = new();
 
 
@@ -62,12 +64,14 @@ namespace FoodToTry.ViewModels
 
             var food = new Food
             {
-                RestaurantName = NewRestaurantName
+                RestaurantName = NewRestaurantName,
+                FoodItems = NewFoodItems.ToList().Join(";"),
+                AdditionalInfo = NewAdditionalInfo ?? string.Empty
             };
 
-            //_foodRepository.Insert(food);
+            _foodRepository.Insert(food);
 
-            //await Shell.Current.GoToAsync("..");
+            await Shell.Current.GoToAsync("..");
         }
     }
 }

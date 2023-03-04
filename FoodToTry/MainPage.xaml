@@ -4,7 +4,8 @@
              x:Class="FoodToTry.MainPage"
              xmlns:viewModel="clr-namespace:FoodToTry.ViewModels"
              xmlns:model="clr-namespace:InfrastructureAbstractions.Entities;assembly=InfrastructureAbstractions"
-             x:DataType="viewModel:MainPageViewModel">
+             x:DataType="viewModel:MainPageViewModel" 
+             >
 
     <ScrollView>
         <VerticalStackLayout

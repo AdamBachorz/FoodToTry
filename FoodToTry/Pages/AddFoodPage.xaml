@@ -45,6 +45,11 @@
             </CollectionView.ItemTemplate>
         </CollectionView>
 
+        <Entry
+            Placeholder="Wprowadź dodatkowe informacje (opcjonalnie)"
+            Text="{Binding NewAdditionalInfo}"
+            />
+        
         <Button 
             Text="Dodaj jedzenie"
             BackgroundColor="Green"

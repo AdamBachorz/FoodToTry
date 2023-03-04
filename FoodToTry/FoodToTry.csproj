@@ -68,4 +68,10 @@
 	  <PackageReference Include="Microsoft.Extensions.Configuration.Json" Version="7.0.0" />
 	</ItemGroup>
 
+	<ItemGroup>
+	  <ProjectReference Include="..\Domain.Abstractions\Domain.Abstractions.csproj" />
+	  <ProjectReference Include="..\Domain\Domain.csproj" />
+	  <ProjectReference Include="..\Infrastructure.Abstractions\Infrastructure.Abstractions.csproj" />
+	</ItemGroup>
+
 </Project>

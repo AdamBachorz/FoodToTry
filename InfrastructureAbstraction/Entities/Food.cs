@@ -6,15 +6,22 @@ namespace InfrastructureAbstractions.Entities;
 
 public class Food : Entity
 {
-    public string? RestaurantName { get; set; }
-    public string? FoodItems { get; set; }
+    public string RestaurantName { get; set; }
+    public string FoodItems { get; set; }
     public FoodState FoodState { get; set; } = FoodState.Open;
     public DateTime? CreateDate { get; set; } = DateTime.Now.Date;
     public string AdditionalInfo { get; set; } = string.Empty;
 
     [NotMapped]
-    public IList<string>? FoodItemsList => FoodItems?.Split(Codes.FoodItemSeparator)?.ToList();
+    public IList<string>? FoodItemsList => FoodItems.Split(Codes.FoodItemSeparator)?.ToList();
     [NotMapped]
-    public string FoodItemsDescription => $"({FoodItems?.Replace(Codes.FoodItemSeparator, Codes.FoodItemInDescriptionSeparator)/*.Substring(0, 20)*/}...)";
+    public string FoodItemsDescription => CreateFoodItemsDescription();
+
+    private string CreateFoodItemsDescription()
+    {
+        var description = FoodItems.Replace(Codes.FoodItemSeparator, Codes.FoodItemInDescriptionSeparator);
+
+        return description.Length >= Codes.MaxDescriptionLength - 2 ? $"({description.Substring(0, Codes.MaxDescriptionLength)}...)" : $"({description})";
+    }
 }
 

@@ -47,7 +47,7 @@ public static class MauiProgram
         });
         builder.Services.AddSingleton<IEFCCustomConfig>(config);
 
-        builder.Services.AddSingleton<MainPage>();
+        builder.Services.AddTransient<MainPage>();
         builder.Services.AddTransient<AddFoodPage>();
 
         builder.Services.AddTransient<MainPageViewModel>();

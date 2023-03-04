@@ -6,7 +6,8 @@
              xmlns:viewModel="clr-namespace:FoodToTry.ViewModels"
              x:DataType="viewModel:AddFoodViewModel">
 
-    <StackLayout>
+    <StackLayout Spacing="25"       
+        >
 
         <Entry
             Placeholder="Wprowadź nazwę restauracji"

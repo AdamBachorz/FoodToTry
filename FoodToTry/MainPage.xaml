@@ -1,7 +1,10 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="FoodToTry.MainPage">
+             x:Class="FoodToTry.MainPage"
+             xmlns:viewModel="clr-namespace:FoodToTry.ViewModels"
+             xmlns:model="clr-namespace:Infrastructure.Entities;assembly=Infrastructure"
+             x:DataType="viewModel:MainPageViewModel">
 
     <ScrollView>
         <VerticalStackLayout
@@ -9,7 +12,39 @@
             Padding="30,0"
             VerticalOptions="Center">
 
-           
+            <CollectionView ItemsSource="{Binding FoodItems}"
+                        SelectionMode="None">
+                <CollectionView.ItemTemplate>
+                    <DataTemplate x:DataType="{x:Type model:Food}">
+                        <SwipeView>
+                            <SwipeView.RightItems>
+                                <!--<SwipeItems>
+                                    <SwipeItem Text="Delete"
+                                           BackgroundColor="Red"
+                                           Command="{Binding Source={RelativeSource AncestorType={x:Type viewmodel:MainViewModel}}, Path=DeleteCommand}"
+                                           CommandParameter="{Binding .}"/>
+                                </SwipeItems>-->
+                            </SwipeView.RightItems>
+                            <Frame Padding="20">
+                                <!--<Frame.GestureRecognizers>
+                                    <TapGestureRecognizer 
+                                        Command="{Binding Source={RelativeSource AncestorType={x:Type viewmodel:MainViewModel}}, Path=TapCommand}"
+                                        CommandParameter="{Binding .}"/>
+                                </Frame.GestureRecognizers>-->
+                                <HorizontalStackLayout Spacing="25">
+                                    <Label Text="{Binding RestaurantName}"
+                                        FontSize="10"/>
+                                    <Label Text="{Binding FoodItemsDescription}"
+                                        FontSize="10" TextColor="Gray"/>
+                                </HorizontalStackLayout>
+                            </Frame>
+                        </SwipeView>
+                    </DataTemplate>
+
+                </CollectionView.ItemTemplate>
+
+            </CollectionView>
+
 
         </VerticalStackLayout>
     </ScrollView>

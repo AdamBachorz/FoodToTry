@@ -1,4 +1,5 @@
 ﻿using BachorzLibrary.DAL.DotNetSix.EntityFrameworkCore;
+using FoodToTry.ViewModels;
 using Infrastructure;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
@@ -44,7 +45,7 @@ public static class MauiProgram
         builder.Services.AddSingleton<IEFCCustomConfig>(config);
 
         builder.Services.AddSingleton<MainPage>();
-
+        builder.Services.AddTransient<MainPageViewModel>();
         
 
         return builder.Build();

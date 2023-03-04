@@ -1,5 +1,6 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
+using FoodToTry.Pages;
 using InfrastructureAbstractions.Entities;
 using InfrastructureAbstractions.Repositories;
 using System;
@@ -27,9 +28,10 @@ namespace FoodToTry.ViewModels
 
 
         [RelayCommand]
-        private async Task CheckboxChanged(Food food)
+        private async Task OpenAddNewFood()
         {
-
+            await Shell.Current.GoToAsync(nameof(AddFoodPage));
         }
+        
     }
 }

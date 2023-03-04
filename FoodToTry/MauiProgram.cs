@@ -1,4 +1,5 @@
 ﻿using BachorzLibrary.DAL.DotNetSix.EntityFrameworkCore;
+using FoodToTry.Pages;
 using FoodToTry.ViewModels;
 using Infrastructure;
 using Infrastructure.Repositories;
@@ -47,7 +48,10 @@ public static class MauiProgram
         builder.Services.AddSingleton<IEFCCustomConfig>(config);
 
         builder.Services.AddSingleton<MainPage>();
+        builder.Services.AddTransient<AddFoodPage>();
+
         builder.Services.AddTransient<MainPageViewModel>();
+        builder.Services.AddTransient<AddFoodViewModel>();
 
         builder.Services.AddScoped<IFoodRepository, FoodRepository>();
 

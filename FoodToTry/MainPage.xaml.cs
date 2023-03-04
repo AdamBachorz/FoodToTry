@@ -12,9 +12,5 @@ public partial class MainPage : ContentPage
 		BindingContext = vm;
 	}
 
-	private void CheckBox_CheckedChanged(object sender, CheckedChangedEventArgs e)
-	{
-		var t = ((CheckBox)sender).BindingContext as Food;
-	}
 }
 

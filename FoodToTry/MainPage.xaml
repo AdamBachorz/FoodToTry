@@ -12,6 +12,11 @@
             Padding="30,0"
             VerticalOptions="Center">
 
+            <Button
+                Text="Dodaj nowe jedzenie"
+                Command="{Binding OpenAddNewFoodCommand}"
+                />
+
             <CollectionView ItemsSource="{Binding FoodItems}"
                         SelectionMode="None">
                 <CollectionView.ItemTemplate>
@@ -39,7 +44,7 @@
                                             VerticalTextAlignment="Center"
                                             FontSize="12" TextColor="Gray"/>
                                     <CheckBox
-                                        CheckedChanged="CheckBox_CheckedChanged"
+                                        
                                         />
                                 </HorizontalStackLayout>
                             </Frame>

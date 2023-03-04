@@ -1,5 +1,5 @@
 ﻿using BachorzLibrary.DAL.DotNetSix.EntityFrameworkCore;
-using Infrastructure.Entities;
+using InfrastructureAbstractions.Entities;
 using Microsoft.EntityFrameworkCore;
 
 namespace Infrastructure;

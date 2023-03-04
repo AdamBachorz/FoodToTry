@@ -5,13 +5,6 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace Domain;
-public enum DataBase
-{
-    MSSQL = 0,
-    PostgreSQL = 1,
-    Sqlite = 2,
-    MySQL = 3,
-}
 public enum FoodState
 {
     Open = 0,

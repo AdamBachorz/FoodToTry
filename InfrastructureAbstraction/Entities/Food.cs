@@ -1,13 +1,8 @@
-﻿using Domain;
-using Infrastructure;
-using System;
-using System.Collections.Generic;
+﻿using BachorzLibrary.Common.DbModel;
+using Domain;
 using System.ComponentModel.DataAnnotations.Schema;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
-namespace Infrastructure.Entities;
+namespace InfrastructureAbstractions.Entities;
 
     public class Food : Entity
     {
@@ -19,6 +14,6 @@ namespace Infrastructure.Entities;
         [NotMapped]
         public IList<string>? FoodItemsList => FoodItems?.Split(";")?.ToList();
         [NotMapped]
-        public string FoodItemsDescription => $"({FoodItems?.Replace(";", ", ").Substring(0, 20)}...)";
+        public string FoodItemsDescription => $"({FoodItems?.Replace(";", ", ")/*.Substring(0, 20)*/}...)";
     }
 

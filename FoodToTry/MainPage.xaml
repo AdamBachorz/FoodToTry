@@ -3,7 +3,7 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="FoodToTry.MainPage"
              xmlns:viewModel="clr-namespace:FoodToTry.ViewModels"
-             xmlns:model="clr-namespace:Infrastructure.Entities;assembly=Infrastructure"
+             xmlns:model="clr-namespace:InfrastructureAbstractions.Entities;assembly=InfrastructureAbstractions"
              x:DataType="viewModel:MainPageViewModel">
 
     <ScrollView>
@@ -25,17 +25,22 @@
                                            CommandParameter="{Binding .}"/>
                                 </SwipeItems>-->
                             </SwipeView.RightItems>
-                            <Frame Padding="20">
+                            <Frame Padding="10">
                                 <!--<Frame.GestureRecognizers>
                                     <TapGestureRecognizer 
                                         Command="{Binding Source={RelativeSource AncestorType={x:Type viewmodel:MainViewModel}}, Path=TapCommand}"
                                         CommandParameter="{Binding .}"/>
                                 </Frame.GestureRecognizers>-->
                                 <HorizontalStackLayout Spacing="25">
-                                    <Label Text="{Binding RestaurantName}"
-                                        FontSize="10"/>
+                                    <Label Text="{Binding RestaurantName}" 
+                                           VerticalTextAlignment="Center"
+                                           FontSize="15"/>
                                     <Label Text="{Binding FoodItemsDescription}"
-                                        FontSize="10" TextColor="Gray"/>
+                                            VerticalTextAlignment="Center"
+                                            FontSize="12" TextColor="Gray"/>
+                                    <CheckBox
+                                        CheckedChanged="CheckBox_CheckedChanged"
+                                        />
                                 </HorizontalStackLayout>
                             </Frame>
                         </SwipeView>

@@ -13,8 +13,8 @@ public class Food : Entity
     public string AdditionalInfo { get; set; } = string.Empty;
 
     [NotMapped]
-    public IList<string>? FoodItemsList => FoodItems?.Split(";")?.ToList();
+    public IList<string>? FoodItemsList => FoodItems?.Split(Codes.FoodItemSeparator)?.ToList();
     [NotMapped]
-    public string FoodItemsDescription => $"({FoodItems?.Replace(";", ", ")/*.Substring(0, 20)*/}...)";
+    public string FoodItemsDescription => $"({FoodItems?.Replace(Codes.FoodItemSeparator, Codes.FoodItemInDescriptionSeparator)/*.Substring(0, 20)*/}...)";
 }
 

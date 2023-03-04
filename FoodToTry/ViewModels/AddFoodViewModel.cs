@@ -1,6 +1,7 @@
 ﻿using BachorzLibrary.Common.Extensions;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
+using Domain;
 using InfrastructureAbstractions.Entities;
 using InfrastructureAbstractions.Repositories;
 using System;
@@ -36,9 +37,9 @@ namespace FoodToTry.ViewModels
         private async Task AddFood()
         {
             var foodItem = NewFoodEntry.Trim()
-                .RemoveText(";")
+                .RemoveText(Codes.FoodItemSeparator)
                 .RemoveText(",")
-                .RemoveText(", ");
+                .RemoveText(Codes.FoodItemInDescriptionSeparator);
 
             if (foodItem.HasValue())
             {
@@ -65,7 +66,7 @@ namespace FoodToTry.ViewModels
             var food = new Food
             {
                 RestaurantName = NewRestaurantName,
-                FoodItems = NewFoodItems.ToList().Join(";"),
+                FoodItems = NewFoodItems.ToList().Join(Codes.FoodItemSeparator),
                 AdditionalInfo = NewAdditionalInfo ?? string.Empty
             };
 

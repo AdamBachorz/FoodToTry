@@ -1,4 +1,5 @@
 ﻿using BachorzLibrary.DAL.DotNetSix.EntityFrameworkCore;
+using Infrastructure;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using System.Reflection;
@@ -29,23 +30,22 @@ public static class MauiProgram
         builder.Configuration.AddJsonStream(stream);
         var config = builder.Configuration.GetSection(nameof(EFCCustomConfig)).Get<EFCCustomConfig>();
 
-        //builder.Services.AddDbContext<DataBaseContext>(options =>
-        //{
-        //    if (config.IsProduction)
-        //    {
-        //        options.UseNpgsql(config.ConnectionString);
-        //    }
-        //    else
-        //    {
-        //        options.UseSqlite(config.ConnectionString);
-        //    }
-        //});
+        builder.Services.AddDbContext<DataBaseContext>(options =>
+        {
+            if (config.IsProduction)
+            {
+                options.UseNpgsql(config.ConnectionString);
+            }
+            else
+            {
+                options.UseSqlite(config.ConnectionString);
+            }
+        });
+        builder.Services.AddSingleton<IEFCCustomConfig>(config);
 
         builder.Services.AddSingleton<MainPage>();
 
         
-
-        builder.Services.AddSingleton<IEFCCustomConfig>(config);
 
         return builder.Build();
 	}

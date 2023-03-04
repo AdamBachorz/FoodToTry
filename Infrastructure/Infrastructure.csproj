@@ -6,6 +6,14 @@
     <Nullable>enable</Nullable>
   </PropertyGroup>
 
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
+    <WarningsAsErrors />
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
+    <WarningsAsErrors />
+  </PropertyGroup>
+
   <ItemGroup>
     <ProjectReference Include="..\Domain.Abstractions\Domain.Abstractions.csproj" />
     <ProjectReference Include="..\Domain\Domain.csproj" />
@@ -13,8 +21,17 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Entities\" />
     <Folder Include="Repositories\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="BachorzLibrary.Common" Version="0.0.2" />
+    <PackageReference Include="BachorzLibrary.DAL" Version="0.0.3" />
+    <PackageReference Include="BachorzLibrary.DAL.DotNetSix" Version="0.0.2" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="7.0.3">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
   </ItemGroup>
 
 </Project>

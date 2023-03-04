@@ -1,0 +1,1 @@
+dotnet publish FoodToTry.csproj -f:net6.0-android -c:Release -p:PackageVersion= --no-dependencies

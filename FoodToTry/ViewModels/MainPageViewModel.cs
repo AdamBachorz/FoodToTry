@@ -18,19 +18,19 @@ namespace FoodToTry.ViewModels
 
 
         [ObservableProperty]
-        private ObservableCollection<Food> foodItems;
+        private ObservableCollection<Food> foods;
 
         public MainPageViewModel(IFoodRepository foodRepository)
         {
             _foodRepository = foodRepository;
-            FoodItems = new ObservableCollection<Food>(_foodRepository.GetAll());
+            Foods = new ObservableCollection<Food>(_foodRepository.GetAll());
         }
 
 
         [RelayCommand]
         private async Task OpenAddNewFood()
         {
-            await Shell.Current.GoToAsync(nameof(AddFoodPage));
+            await Shell.Current.GoToAsync(nameof(AddFoodPage), new Dictionary<string, object> { { "Foods", Foods } });
         }
         
     }

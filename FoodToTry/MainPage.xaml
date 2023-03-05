@@ -18,7 +18,7 @@
                 Command="{Binding OpenAddNewFoodCommand}"
                 />
 
-            <CollectionView ItemsSource="{Binding FoodItems}"
+            <CollectionView ItemsSource="{Binding Foods}"
                         SelectionMode="None">
                 <CollectionView.ItemTemplate>
                     <DataTemplate x:DataType="{x:Type model:Food}">

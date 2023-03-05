@@ -14,6 +14,7 @@ using System.Threading.Tasks;
 
 namespace FoodToTry.ViewModels
 {
+    [QueryProperty("Foods", "Foods")]
     public partial class AddFoodViewModel : ObservableObject
     {
         private readonly IFoodRepository _foodRepository;
@@ -26,6 +27,8 @@ namespace FoodToTry.ViewModels
         private string newAdditionalInfo;
         [ObservableProperty]
         private ObservableCollection<string> newFoodItems = new();
+        [ObservableProperty]
+        private ObservableCollection<Food> foods;
 
 
         public AddFoodViewModel(IFoodRepository foodRepository)
@@ -45,7 +48,7 @@ namespace FoodToTry.ViewModels
             {
                 NewFoodItems.Add(foodItem);
             }
-
+            
             NewFoodEntry = string.Empty;
         }
 

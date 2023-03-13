@@ -42,7 +42,10 @@ namespace FoodToTry.ViewModels
 
         public async Task OnCheckboxChange(Food food, bool isChecked)
         {
+            await Utils.InvokeIfInternetIsOn(async() =>
+            {
 
+            });
         }
         
     }

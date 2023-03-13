@@ -10,12 +10,10 @@ namespace FoodToTry
 {
     public static class Utils
     {
-        public static bool IsInternet()
-        {
-            return Connectivity.Current.NetworkAccess == NetworkAccess.Internet;
-        }
-        
-        public static void InvokeIfInternetIsOn(Action action, Action actionIfNoInternet = null)
+        public static async Task GoBack() => await Shell.Current.GoToAsync("..");
+        public static bool IsInternet() => Connectivity.Current.NetworkAccess == NetworkAccess.Internet;
+
+        public static async Task InvokeIfInternetIsOn(Action action, Action actionIfNoInternet = null)
         {
             if (Connectivity.Current.NetworkAccess == NetworkAccess.Internet)
             {
@@ -25,7 +23,7 @@ namespace FoodToTry
             {
                 if (actionIfNoInternet is null)
                 {
-                    Shell.Current.DisplayAlert("Uh Oh!", "No Internet", "OK");
+                    await Shell.Current.DisplayAlert("Uh Oh!", "No Internet", "OK");
                 }
                 else
                 {
@@ -34,9 +32,6 @@ namespace FoodToTry
             }
         }
 
-        public static T GetObjectFromControl<C, T>(object sender) where C : View where T : class
-        {
-            return ((C)sender).BindingContext as T;
-        }
+        public static T GetObjectFromControl<C, T>(object sender) where C : View where T : class => ((C)sender).BindingContext as T;
     }
 }

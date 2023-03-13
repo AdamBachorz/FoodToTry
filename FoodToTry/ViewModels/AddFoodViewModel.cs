@@ -29,23 +29,38 @@ namespace FoodToTry.ViewModels
         }
 
         [RelayCommand]
-        private async Task AddFood()
+        private void AddFood()
         {
-            var foodItem = NewFoodEntry.Trim()
-                .RemoveText(Codes.FoodItemSeparator)
-                .RemoveText(",")
-                .RemoveText(Codes.FoodItemInDescriptionSeparator);
-
-            if (foodItem.HasValue())
+            if (NewFoodEntry.Contains(","))
             {
-                NewFoodItems.Add(foodItem);
+                var foodItems = NewFoodEntry.Trim()
+                    .Split(",")
+                    .Select(x => x.Trim())
+                    .WithoutEmptyValues();
+
+                if (foodItems.IsNotNullOrEmpty())
+                {
+                    foodItems.ForEach(fi => NewFoodItems.Add(fi));
+                }
+            }
+            else
+            {
+                var foodItem = NewFoodEntry.Trim()
+                    .RemoveText(Codes.FoodItemSeparator)
+                    .RemoveText(",")
+                    .RemoveText(Codes.FoodItemInDescriptionSeparator);
+
+                if (foodItem.HasValue())
+                {
+                    NewFoodItems.Add(foodItem);
+                } 
             }
 
             NewFoodEntry = string.Empty;
         }
 
         [RelayCommand]
-        private async Task DeleteEntry(string entry)
+        private void DeleteEntry(string entry)
         {
             if (NewFoodItems.Contains(entry))
             {
@@ -56,17 +71,20 @@ namespace FoodToTry.ViewModels
         [RelayCommand]
         private async Task SubmitFood()
         {
-            if (NewRestaurantName.HasNotValue() || NewFoodItems.Count == 0) return;
-
-            var food = _foodRepository.Insert(new Food
+            await Utils.InvokeIfInternetIsOn(async () =>
             {
-                RestaurantName = NewRestaurantName,
-                FoodItems = NewFoodItems.ToList().Join(Codes.FoodItemSeparator),
-                AdditionalInfo = NewAdditionalInfo ?? string.Empty
-            });
+                if (NewRestaurantName.HasNotValue() || NewFoodItems.Count == 0) return;
 
-            Messenger.Send(food);
-            await Shell.Current.GoToAsync("..");
+                var food = _foodRepository.Insert(new Food
+                {
+                    RestaurantName = NewRestaurantName,
+                    FoodItems = NewFoodItems.ToList().Join(Codes.FoodItemSeparator),
+                    AdditionalInfo = NewAdditionalInfo ?? string.Empty
+                });
+
+                Messenger.Send(food);
+                await Utils.GoBack();
+            });
         }
     }
 }

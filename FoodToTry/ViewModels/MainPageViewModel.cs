@@ -21,10 +21,6 @@ namespace FoodToTry.ViewModels
         [ObservableProperty]
         private ObservableCollection<Food> _foods;
 
-        [ObservableProperty]
-        //[NotifyPropertyChangedFor(nameof(OnCheckboxChange))]
-        private bool _isChecked;
-
         public MainPageViewModel(IFoodRepository foodRepository) : base()
         {
             _foodRepository = foodRepository;

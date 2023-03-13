@@ -8,18 +8,31 @@
              >
 
     <ScrollView>
-        <VerticalStackLayout
-            Spacing="25"
-            Padding="30,0"
-            VerticalOptions="Center">
+        <Grid RowSpacing="10">
+            <Grid.RowDefinitions>
+                <RowDefinition/>
+                <RowDefinition Height="50"/>
+                <RowDefinition/>
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition/>
+            </Grid.ColumnDefinitions>
 
-            <Button
+            <Label Grid.Row="0" 
+                   Text="Food To Try" 
+                   FontSize="50"
+                   VerticalTextAlignment="Center"
+                   HorizontalTextAlignment="Center"
+                   />
+            
+            <Button Grid.Row="1"
                 Text="Dodaj nowe jedzenie"
                 Command="{Binding OpenAddNewFoodCommand}"
                 />
-
-            <CollectionView ItemsSource="{Binding Foods}"
-                        SelectionMode="None">
+            
+            <CollectionView Grid.Row="2"
+                            ItemsSource="{Binding Foods}"
+                            SelectionMode="None">
                 <CollectionView.ItemTemplate>
                     <DataTemplate x:DataType="{x:Type model:Food}">
                         <SwipeView>
@@ -37,19 +50,31 @@
                                         Command="{Binding Source={RelativeSource AncestorType={x:Type viewmodel:MainViewModel}}, Path=TapCommand}"
                                         CommandParameter="{Binding .}"/>
                                 </Frame.GestureRecognizers>-->
-                                <HorizontalStackLayout Spacing="25">
-                                    <Label Text="{Binding RestaurantName}" 
-                                           VerticalTextAlignment="Center"
+                                <Grid>
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition/>
+                                    </Grid.RowDefinitions>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition/>
+                                        <ColumnDefinition/>
+                                        <ColumnDefinition/>
+                                    </Grid.ColumnDefinitions>
+                                    
+                                    <Label Grid.Row="0" Grid.Column="0"
+                                           Text="{Binding RestaurantName}" 
+                                           VerticalOptions="Center"
+                                           HorizontalOptions="Start"
                                            FontSize="15"/>
-                                    <Label Text="{Binding FoodItemsDescription}"
-                                            VerticalTextAlignment="Center"
+                                    <Label Grid.Row="0" Grid.Column="1"
+                                        Text="{Binding FoodItemsDescription}"
+                                            VerticalOptions="Center"
                                             FontSize="12" TextColor="Gray"/>
-                                    <CheckBox
+                                    <CheckBox Grid.Row="0" Grid.Column="2"
                                         CheckedChanged="CheckBox_CheckedChanged"
                                         WidthRequest="50"
                                         HeightRequest="50"
                                         />
-                                </HorizontalStackLayout>
+                                </Grid>
                             </Frame>
                         </SwipeView>
                     </DataTemplate>
@@ -59,7 +84,7 @@
             </CollectionView>
 
 
-        </VerticalStackLayout>
+        </Grid>
     </ScrollView>
 
 </ContentPage>

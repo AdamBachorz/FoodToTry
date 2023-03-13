@@ -45,7 +45,9 @@
                                             VerticalTextAlignment="Center"
                                             FontSize="12" TextColor="Gray"/>
                                     <CheckBox
-                                        
+                                        CheckedChanged="CheckBox_CheckedChanged"
+                                        WidthRequest="50"
+                                        HeightRequest="50"
                                         />
                                 </HorizontalStackLayout>
                             </Frame>

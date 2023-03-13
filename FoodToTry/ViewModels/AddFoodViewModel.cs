@@ -1,21 +1,15 @@
 ﻿using BachorzLibrary.Common.Extensions;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
+using CommunityToolkit.Mvvm.Messaging;
 using Domain;
 using InfrastructureAbstractions.Entities;
 using InfrastructureAbstractions.Repositories;
-using System;
-using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.Linq;
-using System.Runtime.CompilerServices;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace FoodToTry.ViewModels
 {
-    [QueryProperty("Foods", "Foods")]
-    public partial class AddFoodViewModel : ObservableObject
+    public partial class AddFoodViewModel : ObservableRecipient
     {
         private readonly IFoodRepository _foodRepository;
 
@@ -27,8 +21,6 @@ namespace FoodToTry.ViewModels
         private string newAdditionalInfo;
         [ObservableProperty]
         private ObservableCollection<string> newFoodItems = new();
-        [ObservableProperty]
-        private ObservableCollection<Food> foods;
 
 
         public AddFoodViewModel(IFoodRepository foodRepository)
@@ -48,7 +40,7 @@ namespace FoodToTry.ViewModels
             {
                 NewFoodItems.Add(foodItem);
             }
-            
+
             NewFoodEntry = string.Empty;
         }
 
@@ -66,15 +58,14 @@ namespace FoodToTry.ViewModels
         {
             if (NewRestaurantName.HasNotValue() || NewFoodItems.Count == 0) return;
 
-            var food = new Food
+            var food = _foodRepository.Insert(new Food
             {
                 RestaurantName = NewRestaurantName,
                 FoodItems = NewFoodItems.ToList().Join(Codes.FoodItemSeparator),
                 AdditionalInfo = NewAdditionalInfo ?? string.Empty
-            };
+            });
 
-            _foodRepository.Insert(food);
-
+            Messenger.Send(food);
             await Shell.Current.GoToAsync("..");
         }
     }

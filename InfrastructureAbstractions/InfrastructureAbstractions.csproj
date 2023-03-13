@@ -6,9 +6,17 @@
     <Nullable>enable</Nullable>
   </PropertyGroup>
 
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
+    <WarningsAsErrors />
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
+    <WarningsAsErrors />
+  </PropertyGroup>
+
   <ItemGroup>
     <PackageReference Include="BachorzLibrary.Common" Version="0.0.3" />
-    <PackageReference Include="BachorzLibrary.DAL.DotNetSix" Version="0.0.2" />
+    <PackageReference Include="BachorzLibrary.DAL" Version="0.0.3" />
   </ItemGroup>
 
   <ItemGroup>

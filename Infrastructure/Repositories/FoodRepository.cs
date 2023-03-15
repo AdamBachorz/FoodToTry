@@ -21,5 +21,11 @@ namespace Infrastructure.Repositories
             _db.Foods.Where(f => f.FoodState == foodState)
             .OrderByDescending(f => f.Id)
             .ToList();
+
+        public IList<string> GetRestaurants() =>
+            _db.Foods
+            .Select(f => f.RestaurantName)
+            .Union(Codes.PopuladBrands)
+            .Distinct().ToList();
     }
 }

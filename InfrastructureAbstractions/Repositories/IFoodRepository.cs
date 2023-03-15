@@ -12,5 +12,6 @@ namespace InfrastructureAbstractions.Repositories
     public interface IFoodRepository : IBaseDao<Food, int>
     {
         IList<Food> GetFoodsByState(FoodState foodState);
+        IList<string> GetRestaurants();
     }
 }

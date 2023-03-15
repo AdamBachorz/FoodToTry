@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 namespace Domain;
 public enum FoodState
 {
-    Open = 0,
+    Opened = 0,
     Closed = 1,
     Postponed = 2,
     Impossible = 3,

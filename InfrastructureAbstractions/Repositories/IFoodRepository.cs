@@ -1,4 +1,5 @@
 ﻿using BachorzLibrary.DAL.DAO;
+using Domain;
 using InfrastructureAbstractions.Entities;
 using System;
 using System.Collections.Generic;
@@ -10,5 +11,6 @@ namespace InfrastructureAbstractions.Repositories
 {
     public interface IFoodRepository : IBaseDao<Food, int>
     {
+        IList<Food> GetFoodsByState(FoodState foodState);
     }
 }

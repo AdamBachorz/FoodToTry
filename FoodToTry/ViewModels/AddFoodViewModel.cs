@@ -53,7 +53,7 @@ namespace FoodToTry.ViewModels
                 if (foodItem.HasValue())
                 {
                     NewFoodItems.Add(foodItem);
-                } 
+                }
             }
 
             NewFoodEntry = string.Empty;

@@ -8,7 +8,7 @@ public class Food : Entity
 {
     public string RestaurantName { get; set; }
     public string FoodItems { get; set; }
-    public FoodState FoodState { get; set; } = FoodState.Open;
+    public FoodState FoodState { get; set; } = FoodState.Opened;
     public DateTime? CreateDate { get; set; } = DateTime.Now.Date;
     public string AdditionalInfo { get; set; } = string.Empty;
 

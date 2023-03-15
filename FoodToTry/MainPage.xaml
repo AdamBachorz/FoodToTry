@@ -10,7 +10,10 @@
     <ScrollView>
         <Grid RowSpacing="10">
             <Grid.RowDefinitions>
-                <RowDefinition/>
+                <RowDefinition Height="100"/>
+                <RowDefinition Height="50"/>
+                <RowDefinition Height="30"/>
+                <RowDefinition Height="500"/>
                 <RowDefinition Height="50"/>
                 <RowDefinition/>
             </Grid.RowDefinitions>
@@ -29,9 +32,14 @@
                 Text="Dodaj nowe jedzenie"
                 Command="{Binding OpenAddNewFoodCommand}"
                 />
-            
-            <CollectionView Grid.Row="2"
-                            ItemsSource="{Binding Foods}"
+
+            <Label Grid.Row="2" 
+                   Text="Aktywne pozycje" 
+                   FontSize="20"
+                   />
+
+            <CollectionView Grid.Row="3"
+                            ItemsSource="{Binding OpenedFoods}"
                             SelectionMode="None">
                 <CollectionView.ItemTemplate>
                     <DataTemplate x:DataType="{x:Type model:Food}">
@@ -59,7 +67,7 @@
                                         <ColumnDefinition/>
                                         <ColumnDefinition/>
                                     </Grid.ColumnDefinitions>
-                                    
+
                                     <Label Grid.Row="0" Grid.Column="0"
                                            Text="{Binding RestaurantName}" 
                                            VerticalOptions="Center"
@@ -78,9 +86,64 @@
                             </Frame>
                         </SwipeView>
                     </DataTemplate>
-
                 </CollectionView.ItemTemplate>
+            </CollectionView>
 
+            <Label Grid.Row="4" 
+                   Text="Zaliczone pozycje" 
+                   FontSize="20"
+                   />
+
+            <CollectionView Grid.Row="5"
+                            ItemsSource="{Binding ClosedFoods}"
+                            SelectionMode="None">
+                <CollectionView.ItemTemplate>
+                    <DataTemplate x:DataType="{x:Type model:Food}">
+                        <SwipeView>
+                            <SwipeView.RightItems>
+                                <!--<SwipeItems>
+                                    <SwipeItem Text="Delete"
+                                           BackgroundColor="Red"
+                                           Command="{Binding Source={RelativeSource AncestorType={x:Type viewmodel:MainViewModel}}, Path=DeleteCommand}"
+                                           CommandParameter="{Binding .}"/>
+                                </SwipeItems>-->
+                            </SwipeView.RightItems>
+                            <Frame Padding="10">
+                                <!--<Frame.GestureRecognizers>
+                                    <TapGestureRecognizer 
+                                        Command="{Binding Source={RelativeSource AncestorType={x:Type viewmodel:MainViewModel}}, Path=TapCommand}"
+                                        CommandParameter="{Binding .}"/>
+                                </Frame.GestureRecognizers>-->
+                                <Grid>
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition/>
+                                    </Grid.RowDefinitions>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition/>
+                                        <ColumnDefinition/>
+                                        <ColumnDefinition/>
+                                    </Grid.ColumnDefinitions>
+
+                                    <Label Grid.Row="0" Grid.Column="0"
+                                           Text="{Binding RestaurantName}" 
+                                           VerticalOptions="Center"
+                                           HorizontalOptions="Start"
+                                           FontSize="15"/>
+                                    <Label Grid.Row="0" Grid.Column="1"
+                                        Text="{Binding FoodItemsDescription}"
+                                            VerticalOptions="Center"
+                                            FontSize="12" TextColor="Gray"/>
+                                    <CheckBox Grid.Row="0" Grid.Column="2"
+                                        IsChecked="True"
+                                        CheckedChanged="CheckBox_CheckedChanged"
+                                        WidthRequest="50"
+                                        HeightRequest="50"
+                                        />
+                                </Grid>
+                            </Frame>
+                        </SwipeView>
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
             </CollectionView>
 
 

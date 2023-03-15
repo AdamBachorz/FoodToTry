@@ -1,6 +1,7 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using CommunityToolkit.Mvvm.Messaging;
+using Domain;
 using FoodToTry.Pages;
 using InfrastructureAbstractions.Entities;
 using InfrastructureAbstractions.Repositories;
@@ -19,19 +20,22 @@ namespace FoodToTry.ViewModels
 
 
         [ObservableProperty]
-        private ObservableCollection<Food> _foods;
+        private ObservableCollection<Food> _openedFoods;
+        [ObservableProperty]
+        private ObservableCollection<Food> _closedFoods;
 
         public MainPageViewModel(IFoodRepository foodRepository) : base()
         {
             _foodRepository = foodRepository;
-            Foods = new ObservableCollection<Food>(_foodRepository.GetAll());
+            OpenedFoods = new ObservableCollection<Food>(_foodRepository.GetFoodsByState(FoodState.Opened));
+            ClosedFoods = new ObservableCollection<Food>(_foodRepository.GetFoodsByState(FoodState.Closed));
             
             Messenger.Register(this);
         }
 
         public void Receive(Food message)
         {
-            Foods.Add(message);
+            OpenedFoods.Add(message);
         }
 
         [RelayCommand]
@@ -42,9 +46,22 @@ namespace FoodToTry.ViewModels
 
         public async Task OnCheckboxChange(Food food, bool isChecked)
         {
-            await Utils.InvokeIfInternetIsOn(async() =>
+            await Utils.InvokeIfInternetIsOn(async () =>
             {
+                if (isChecked)
+                {
+                    food.FoodState = FoodState.Closed;
+                    OpenedFoods.Remove(food);
+                    ClosedFoods.Add(food);
+                }
+                else
+                {
+                    food.FoodState = FoodState.Opened;
+                    OpenedFoods.Add(food);
+                    ClosedFoods.Remove(food);
+                }
 
+                _foodRepository.Update(food);
             });
         }
         

@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace Domain;
-public enum FoodState
+public enum State
 {
     Opened = 0,
     Closed = 1,

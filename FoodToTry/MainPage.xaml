@@ -14,8 +14,6 @@
                 <RowDefinition Height="50"/>
                 <RowDefinition Height="30"/>
                 <RowDefinition Height="500"/>
-                <RowDefinition Height="50"/>
-                <RowDefinition/>
             </Grid.RowDefinitions>
             <Grid.ColumnDefinitions>
                 <ColumnDefinition/>
@@ -39,10 +37,10 @@
                    />
 
             <CollectionView Grid.Row="3"
-                            ItemsSource="{Binding OpenedFoods}"
+                            ItemsSource="{Binding Restaurants}"
                             SelectionMode="None">
                 <CollectionView.ItemTemplate>
-                    <DataTemplate x:DataType="{x:Type model:Food}">
+                    <DataTemplate x:DataType="{x:Type model:Restaurant}">
                         <SwipeView>
                             <SwipeView.RightItems>
                                 <!--<SwipeItems>
@@ -69,7 +67,7 @@
                                     </Grid.ColumnDefinitions>
 
                                     <Label Grid.Row="0" Grid.Column="0"
-                                           Text="{Binding RestaurantName}" 
+                                           Text="{Binding Name}" 
                                            VerticalOptions="Center"
                                            HorizontalOptions="Start"
                                            FontSize="15"/>
@@ -88,64 +86,6 @@
                     </DataTemplate>
                 </CollectionView.ItemTemplate>
             </CollectionView>
-
-            <Label Grid.Row="4" 
-                   Text="Zaliczone pozycje" 
-                   FontSize="20"
-                   />
-
-            <CollectionView Grid.Row="5"
-                            ItemsSource="{Binding ClosedFoods}"
-                            SelectionMode="None">
-                <CollectionView.ItemTemplate>
-                    <DataTemplate x:DataType="{x:Type model:Food}">
-                        <SwipeView>
-                            <SwipeView.RightItems>
-                                <!--<SwipeItems>
-                                    <SwipeItem Text="Delete"
-                                           BackgroundColor="Red"
-                                           Command="{Binding Source={RelativeSource AncestorType={x:Type viewmodel:MainViewModel}}, Path=DeleteCommand}"
-                                           CommandParameter="{Binding .}"/>
-                                </SwipeItems>-->
-                            </SwipeView.RightItems>
-                            <Frame Padding="10">
-                                <!--<Frame.GestureRecognizers>
-                                    <TapGestureRecognizer 
-                                        Command="{Binding Source={RelativeSource AncestorType={x:Type viewmodel:MainViewModel}}, Path=TapCommand}"
-                                        CommandParameter="{Binding .}"/>
-                                </Frame.GestureRecognizers>-->
-                                <Grid>
-                                    <Grid.RowDefinitions>
-                                        <RowDefinition/>
-                                    </Grid.RowDefinitions>
-                                    <Grid.ColumnDefinitions>
-                                        <ColumnDefinition/>
-                                        <ColumnDefinition/>
-                                        <ColumnDefinition/>
-                                    </Grid.ColumnDefinitions>
-
-                                    <Label Grid.Row="0" Grid.Column="0"
-                                           Text="{Binding RestaurantName}" 
-                                           VerticalOptions="Center"
-                                           HorizontalOptions="Start"
-                                           FontSize="15"/>
-                                    <Label Grid.Row="0" Grid.Column="1"
-                                        Text="{Binding FoodItemsDescription}"
-                                            VerticalOptions="Center"
-                                            FontSize="12" TextColor="Gray"/>
-                                    <CheckBox Grid.Row="0" Grid.Column="2"
-                                        IsChecked="True"
-                                        CheckedChanged="CheckBox_CheckedChanged"
-                                        WidthRequest="50"
-                                        HeightRequest="50"
-                                        />
-                                </Grid>
-                            </Frame>
-                        </SwipeView>
-                    </DataTemplate>
-                </CollectionView.ItemTemplate>
-            </CollectionView>
-
 
         </Grid>
     </ScrollView>

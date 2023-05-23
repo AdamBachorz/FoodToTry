@@ -75,14 +75,14 @@ namespace FoodToTry.ViewModels
             {
                 if (NewRestaurantName.HasNotValue() || NewFoodItems.Count == 0) return;
 
-                var food = _foodRepository.Insert(new Food
+                var restaurnat = _foodRepository.Insert(new Restaurant
                 {
-                    RestaurantName = NewRestaurantName,
+                    Name = NewRestaurantName,
                     FoodItems = NewFoodItems.ToList().Join(Codes.FoodItemSeparator),
                     AdditionalInfo = NewAdditionalInfo ?? string.Empty
                 });
 
-                Messenger.Send(food);
+                Messenger.Send(restaurnat);
                 await Utils.GoBack();
             });
         }

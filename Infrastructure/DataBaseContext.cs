@@ -6,7 +6,7 @@ namespace Infrastructure;
 
 public class DataBaseContext : BaseDbContext
 {
-    public DbSet<Food> Foods { get; set; }
+    public DbSet<Restaurant> Restaurants { get; set; }
 
     public DataBaseContext()
     {
@@ -19,8 +19,8 @@ public class DataBaseContext : BaseDbContext
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
         base.OnModelCreating(modelBuilder);
-        modelBuilder.Entity<Food>().HasData(
-            new Food { Id = 1, RestaurantName = "Pierwsza restauracja", FoodItems = "Pizza;Kebab", }
+        modelBuilder.Entity<Restaurant>().HasData(
+            new Restaurant { Id = 1, Name = "Pierwsza restauracja", FoodItems = "Pizza;Kebab", }
         );
     }
 }

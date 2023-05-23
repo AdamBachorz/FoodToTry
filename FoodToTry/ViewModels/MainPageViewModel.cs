@@ -5,37 +5,30 @@ using Domain;
 using FoodToTry.Pages;
 using InfrastructureAbstractions.Entities;
 using InfrastructureAbstractions.Repositories;
-using System;
-using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace FoodToTry.ViewModels
 {
-    public partial class MainPageViewModel : ObservableRecipient, IRecipient<Food>
+    public partial class MainPageViewModel : ObservableRecipient, IRecipient<Restaurant>
     {
         private readonly IFoodRepository _foodRepository;
 
 
         [ObservableProperty]
-        private ObservableCollection<Food> _openedFoods;
-        [ObservableProperty]
-        private ObservableCollection<Food> _closedFoods;
+        private ObservableCollection<Restaurant> _restaurants;
 
         public MainPageViewModel(IFoodRepository foodRepository) : base()
         {
             _foodRepository = foodRepository;
-            OpenedFoods = new ObservableCollection<Food>(_foodRepository.GetFoodsByState(FoodState.Opened));
-            ClosedFoods = new ObservableCollection<Food>(_foodRepository.GetFoodsByState(FoodState.Closed));
+            var restaurants = _foodRepository.GetOrderedRestaurants();
+            Restaurants = new ObservableCollection<Restaurant>(restaurants);
             
             Messenger.Register(this);
         }
 
-        public void Receive(Food message)
+        public void Receive(Restaurant message)
         {
-            OpenedFoods.Add(message);
+            Restaurants.Add(message);
         }
 
         [RelayCommand]
@@ -44,24 +37,12 @@ namespace FoodToTry.ViewModels
             await Shell.Current.GoToAsync(nameof(AddFoodPage));
         }
 
-        public async Task OnCheckboxChange(Food food, bool isChecked)
+        public async Task OnCheckboxChange(Restaurant restaurant, bool isChecked)
         {
-            await Utils.InvokeIfInternetIsOn(async () =>
+            await Utils.InvokeIfInternetIsOn(() =>
             {
-                if (isChecked)
-                {
-                    food.FoodState = FoodState.Closed;
-                    OpenedFoods.Remove(food);
-                    ClosedFoods.Add(food);
-                }
-                else
-                {
-                    food.FoodState = FoodState.Opened;
-                    OpenedFoods.Add(food);
-                    ClosedFoods.Remove(food);
-                }
-
-                _foodRepository.Update(food);
+                restaurant.State = isChecked ? State.Closed : State.Opened;
+                _foodRepository.Update(restaurant);
             });
         }
         

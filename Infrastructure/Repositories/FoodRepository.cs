@@ -3,28 +3,31 @@ using Domain;
 using InfrastructureAbstractions.Entities;
 using InfrastructureAbstractions.Repositories;
 using Microsoft.EntityFrameworkCore;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Infrastructure.Repositories
 {
-    public class FoodRepository : EFCBaseRepository<Food, DataBaseContext, int>, IFoodRepository
+    public class FoodRepository : EFCBaseRepository<Restaurant, DataBaseContext, int>, IFoodRepository
     {
         public FoodRepository(DataBaseContext db) : base(db)
         {
         }
 
-        public IList<Food> GetFoodsByState(FoodState foodState) => 
-            _db.Foods.Where(f => f.FoodState == foodState)
+        public IList<Restaurant> GetRestaurnatsByState(State foodState) => 
+            _db.Restaurants.Where(f => f.State == foodState)
             .OrderByDescending(f => f.Id)
             .ToList();
 
+        public IList<Restaurant> GetOrderedRestaurants()
+        {
+            return _db.Restaurants
+                .OrderBy(r => r.State)
+                .ThenBy(r => r.Id)
+                .ToList();
+        }
+
         public IList<string> GetRestaurants() =>
-            _db.Foods
-            .Select(f => f.RestaurantName)
+            _db.Restaurants
+            .Select(f => f.Name)
             .Union(Codes.PopuladBrands)
             .Distinct().ToList();
     }
